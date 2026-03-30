@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nisrina Satyaningrum — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F9F7F4;
+    --surface: #FFFFFF;
+    --border: #E8E4DC;
+    --text: #1A1816;
+    --muted: #7A756D;
+    --hint: #B0AAA0;
+    --purple-light: #EEEDFE;
+    --purple-mid: #7F77DD;
+    --purple-dark: #3C3489;
+    --teal-light: #E1F5EE;
+    --teal-dark: #0F6E56;
+    --accent: #534AB7;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  .serif { font-family: 'DM Serif Display', serif; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(249,247,244,0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    height: 56px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-name { font-size: 14px; font-weight: 500; letter-spacing: 0.02em; }
+  .nav-links { display: flex; gap: 1.5rem; }
+  .nav-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.15s; }
+  .nav-links a:hover { color: var(--text); }
+
+  /* HERO */
+  .hero {
+    padding: 120px 2rem 80px;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--border);
+    padding: 4px 12px;
+    border-radius: 99px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(36px, 6vw, 58px);
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 1.25rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero-bio {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 540px;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+  .hero-links { display: flex; gap: 10px; flex-wrap: wrap; }
+  .pill {
+    font-size: 13px;
+    padding: 7px 16px;
+    border-radius: 99px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    text-decoration: none;
+    background: var(--surface);
+    transition: border-color 0.15s, color 0.15s;
+    cursor: pointer;
+  }
+  .pill:hover { border-color: var(--accent); color: var(--accent); }
+  .pill.primary { background: var(--accent); color: white; border-color: var(--accent); }
+  .pill.primary:hover { background: var(--purple-dark); border-color: var(--purple-dark); color: white; }
+
+  /* BRANCHES */
+  .branches-section {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 2rem 5rem;
+  }
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--hint);
+    margin-bottom: 1.25rem;
+    font-weight: 500;
+  }
+  .branches { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .branch-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.15s;
+    text-decoration: none;
+    display: block;
+  }
+  .branch-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .branch-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1rem;
+  }
+  .branch-icon.lang { background: var(--purple-light); }
+  .branch-icon.ops { background: var(--teal-light); }
+  .branch-card h2 { font-size: 17px; font-weight: 500; margin-bottom: 8px; color: var(--text); }
+  .branch-card p { font-size: 13px; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-size: 11px; padding: 3px 10px;
+    border-radius: 99px;
+    border: 1px solid var(--border);
+    color: var(--muted);
+  }
+
+  /* SECTION PAGES */
+  .section-page {
+    display: none;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 80px 2rem 5rem;
+    animation: fadeIn 0.2s ease;
+  }
+  .section-page.visible { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; color: var(--muted);
+    cursor: pointer; margin-bottom: 2rem;
+    transition: color 0.15s;
+    border: none; background: none;
+  }
+  .back-btn:hover { color: var(--text); }
+
+  .page-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    margin-bottom: 0.5rem;
+    line-height: 1.15;
+  }
+  .page-subtitle { font-size: 15px; color: var(--muted); margin-bottom: 2rem; }
+
+  .subnav { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 2rem; }
+  .subnav-btn {
+    font-size: 13px; padding: 6px 14px;
+    border-radius: 99px;
+    border: 1px solid var(--border);
+    color: var(--muted); cursor: pointer;
+    background: var(--surface);
+    transition: all 0.15s;
+  }
+  .subnav-btn:hover, .subnav-btn.active {
+    background: var(--text); color: var(--bg);
+    border-color: var(--text);
+  }
+
+  /* CARDS */
+  .card-grid { display: grid; gap: 14px; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    transition: border-color 0.15s;
+  }
+  .card:hover { border-color: #C8C3BA; }
+  .card-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--hint); margin-bottom: 8px; }
+  .card h3 { font-size: 16px; font-weight: 500; margin-bottom: 8px; color: var(--text); }
+  .card p { font-size: 14px; color: var(--muted); line-height: 1.65; }
+  .stat-row { display: flex; gap: 10px; margin-top: 1rem; }
+  .stat {
+    flex: 1; background: var(--bg);
+    border-radius: 10px; padding: 10px 12px;
+  }
+  .stat-val { font-size: 20px; font-weight: 500; color: var(--text); }
+  .stat-lbl { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .card-action {
+    display: inline-block; margin-top: 1rem;
+    font-size: 13px; color: var(--accent);
+    text-decoration: none; cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .card-action:hover { opacity: 0.7; }
+  .placeholder {
+    display: inline-block; font-size: 10px;
+    padding: 2px 7px; border-radius: 99px;
+    background: #FFF3CD; color: #856404;
+    margin-left: 6px; vertical-align: middle;
+  }
+
+  /* AUDIO BLOCK */
+  .audio-block {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--bg); border-radius: 10px;
+    padding: 12px 14px; margin-top: 1rem;
+  }
+  .play-btn {
+    width: 34px; height: 34px; border-radius: 50%;
+    background: var(--accent); border: none;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; flex-shrink: 0;
+  }
+  .play-icon {
+    width: 0; height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 10px solid white;
+    margin-left: 2px;
+  }
+  .audio-title { font-size: 13px; font-weight: 500; color: var(--text); }
+  .audio-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* DIVIDER */
+  hr { border: none; border-top: 1px solid var(--border); margin: 3rem 0; }
+
+  /* CONTACT */
+  .contact-strip {
+    max-width: 760px; margin: 0 auto;
+    padding: 3rem 2rem 5rem;
+    border-top: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .contact-left h2 { font-family: 'DM Serif Display', serif; font-size: 26px; margin-bottom: 4px; }
+  .contact-left p { font-size: 14px; color: var(--muted); }
+  .contact-links { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  @media (max-width: 600px) {
+    .branches { grid-template-columns: 1fr; }
+    .stat-row { flex-direction: column; }
+    .contact-strip { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Nisrina Satyaningrum</span>
+  <div class="nav-links">
+    <a href="#" onclick="goHome(); return false;">Home</a>
+    <a href="#" onclick="showBranch('lang'); return false;">Language</a>
+    <a href="#" onclick="showBranch('ops'); return false;">Operations</a>
+    <a href="mailto:nisrinasatya16@gmail.com">Contact</a>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div id="home-view">
+  <div class="hero">
+    <span class="hero-tag">Open to remote opportunities</span>
+    <h1>Language. Operations.<br><em>Everything in between.</em></h1>
+    <p class="hero-bio">Bilingual professional (EN/ID) working across translation, localization, executive support, and operations. Based in Semarang, Indonesia — working globally.</p>
+    <div class="hero-links">
+      <a class="pill primary" href="mailto:nisrinasatya16@gmail.com">Get in touch</a>
+      <a class="pill" href="https://linkedin.com/in/nisrinasatya" target="_blank">LinkedIn</a>
+      <a class="pill" href="https://www.ted.com/profiles/33057121/translator" target="_blank">TED Translators</a>
+      <a class="pill" href="https://nisrinasatya.my.canva.site/" target="_blank">Canva Portfolio</a>
+    </div>
+  </div>
+
+  <div class="branches-section">
+    <p class="section-label">Areas of expertise</p>
+    <div class="branches">
+      <a class="branch-card" href="#" onclick="showBranch('lang'); return false;">
+        <div class="branch-icon lang">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h8M3 15h5" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round"/><circle cx="15" cy="13" r="4" stroke="#534AB7" stroke-width="1.5"/><path d="M15 11v2l1.5 1.5" stroke="#534AB7" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h2>Language & Localization</h2>
+        <p>Translation, subtitling, voice talent, and linguistic QA across English and Indonesian.</p>
+        <div class="tag-list">
+          <span class="tag">EN › ID Translation</span>
+          <span class="tag">Subtitling</span>
+          <span class="tag">Voice Talent</span>
+          <span class="tag">Linguistic QA</span>
+          <span class="tag">SDL Trados</span>
+        </div>
+      </a>
+      <a class="branch-card" href="#" onclick="showBranch('ops'); return false;">
+        <div class="branch-icon ops">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="2" width="7" height="7" rx="2" stroke="#0F6E56" stroke-width="1.5"/><rect x="11" y="2" width="7" height="7" rx="2" stroke="#0F6E56" stroke-width="1.5"/><rect x="2" y="11" width="7" height="7" rx="2" stroke="#0F6E56" stroke-width="1.5"/><rect x="11" y="11" width="7" height="7" rx="2" stroke="#0F6E56" stroke-width="1.5"/></svg>
+        </div>
+        <h2>Operations & Executive Support</h2>
+        <p>CEO/COO office management, compliance systems, recruitment, and process design.</p>
+        <div class="tag-list">
+          <span class="tag">Executive Assistant</span>
+          <span class="tag">Process Design</span>
+          <span class="tag">Recruitment</span>
+          <span class="tag">Compliance</span>
+          <span class="tag">Vendor Management</span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="contact-strip">
+    <div class="contact-left">
+      <h2>Let's work together.</h2>
+      <p>Available for remote roles in executive support, localization, and operations.</p>
+    </div>
+    <div class="contact-links">
+      <a class="pill primary" href="mailto:nisrinasatya16@gmail.com">nisrinasatya16@gmail.com</a>
+      <a class="pill" href="https://linkedin.com/in/nisrinasatya" target="_blank">LinkedIn ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- LANGUAGE PAGE -->
+<div id="lang-view" class="section-page">
+  <button class="back-btn" onclick="goHome()">&#8592; Back to home</button>
+  <h1 class="page-title serif">Language &<br>Localization</h1>
+  <p class="page-subtitle">Translation, subtitling, voice, and linguistic QA across English and Indonesian.</p>
+
+  <div class="subnav">
+    <button class="subnav-btn active" onclick="filterCards('lang-cards', 'all', this, 'lang-view')">All</button>
+    <button class="subnav-btn" onclick="filterCards('lang-cards', 'translation', this, 'lang-view')">Translation</button>
+    <button class="subnav-btn" onclick="filterCards('lang-cards', 'subtitling', this, 'lang-view')">Subtitling</button>
+    <button class="subnav-btn" onclick="filterCards('lang-cards', 'voice', this, 'lang-view')">Voice</button>
+  </div>
+
+  <div class="card-grid" id="lang-cards">
+
+    <div class="card" data-cat="translation">
+      <div class="card-eyebrow">Translation · Life Management Science Labs</div>
+      <h3>Course & Marketing Localization (EN › ID)</h3>
+      <p>Localized 5+ course series and marketing assets for a global training company using SDL Trados, maintaining terminology databases and translation memories across concurrent projects. Identified and implemented process improvements that significantly reduced cost and turnaround time.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-val">60%</div><div class="stat-lbl">faster turnaround</div></div>
+        <div class="stat"><div class="stat-val">30%</div><div class="stat-lbl">cost reduction</div></div>
+        <div class="stat"><div class="stat-val">5+</div><div class="stat-lbl">course series</div></div>
+      </div>
+      <a class="card-action" href="#">View translation sample <span class="placeholder">add link</span></a>
+    </div>
+
+    <div class="card" data-cat="translation">
+      <div class="card-eyebrow">Translation · PT STAR Software Indonesia</div>
+      <h3>Technical Documentation (EN › ID)</h3>
+      <p>Translated and post-edited 35,000+ words of cloud computing user guides using SDL Trados and Phrase over a two-year engagement, adhering to strict client style guides and deadlines.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-val">35,000+</div><div class="stat-lbl">words delivered</div></div>
+        <div class="stat"><div class="stat-val">2 yrs</div><div class="stat-lbl">engagement</div></div>
+      </div>
+      <a class="card-action" href="#">View sample <span class="placeholder">add link</span></a>
+    </div>
+
+    <div class="card" data-cat="subtitling">
+      <div class="card-eyebrow">Subtitling · TED Translators (Volunteer)</div>
+      <h3>TED-Ed Indonesian Subtitles</h3>
+      <p>Created Indonesian subtitles for TED-Ed videos in CaptionHub since September 2022, collaborating with review teams to maintain quality and adhere to TED Translators guidelines.</p>
+      <a class="card-action" href="https://www.ted.com/profiles/33057121/translator" target="_blank">View TED profile ↗</a>
+    </div>
+
+    <div class="card" data-cat="subtitling">
+      <div class="card-eyebrow">Subtitling · TUJJU Media</div>
+      <h3>Indonesian TV Show Subtitles (ID › EN)</h3>
+      <p>Created accurate English subtitles for Indonesian TV shows ranging 25–45 minutes per episode under tight deadlines, maintaining broadcaster style guides throughout.</p>
+      <a class="card-action" href="#">View subtitle sample <span class="placeholder">add link</span></a>
+    </div>
+
+    <div class="card" data-cat="voice">
+      <div class="card-eyebrow">Voice Talent · Uliza</div>
+      <h3>Indonesian Audio Narration</h3>
+      <p>Recorded high-quality Indonesian audio narrations from finalized localization scripts for various content types, tailored to each client's tone and specifications.</p>
+      <div class="audio-block">
+        <button class="play-btn"><div class="play-icon"></div></button>
+        <div>
+          <div class="audio-title">Sample narration <span class="placeholder">add audio file link</span></div>
+          <div class="audio-sub">Indonesian · natural narration · ~60 sec</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- OPERATIONS PAGE -->
+<div id="ops-view" class="section-page">
+  <button class="back-btn" onclick="goHome()">&#8592; Back to home</button>
+  <h1 class="page-title serif">Operations &<br>Executive Support</h1>
+  <p class="page-subtitle">CEO/COO support, process design, compliance systems, and market expansion.</p>
+
+  <div class="subnav">
+    <button class="subnav-btn active" onclick="filterCards('ops-cards', 'all', this, 'ops-view')">All</button>
+    <button class="subnav-btn" onclick="filterCards('ops-cards', 'exec', this, 'ops-view')">Executive Support</button>
+    <button class="subnav-btn" onclick="filterCards('ops-cards', 'systems', this, 'ops-view')">Systems & Tools</button>
+    <button class="subnav-btn" onclick="filterCards('ops-cards', 'projects', this, 'ops-view')">Projects</button>
+  </div>
+
+  <div class="card-grid" id="ops-cards">
+
+    <div class="card" data-cat="exec">
+      <div class="card-eyebrow">Executive Support · The KPI Institute</div>
+      <h3>CEO & COO Office Management</h3>
+      <p>Provided high-level support to the CEO and COO across a global remote organization — managing priorities, drafting communications, preparing briefing materials, coordinating senior leadership meetings, and acting as gatekeeper for the executive office.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-val">10+</div><div class="stat-lbl">entities supported</div></div>
+        <div class="stat"><div class="stat-val">400+</div><div class="stat-lbl">employees tracked</div></div>
+      </div>
+    </div>
+
+    <div class="card" data-cat="systems">
+      <div class="card-eyebrow">Process Design · The KPI Institute</div>
+      <h3>CEO Request Tracking System</h3>
+      <p>Designed and implemented a centralized intake system across Microsoft Teams and spreadsheets to log, prioritize, and monitor all incoming CEO requests and to-dos. Adopted organization-wide as the standard process for routing work to the executive office.</p>
+      <a class="card-action" href="#">View screenshot <span class="placeholder">add file</span></a>
+    </div>
+
+    <div class="card" data-cat="systems">
+      <div class="card-eyebrow">Compliance · The KPI Institute</div>
+      <h3>Daily Attendance Compliance Dashboard</h3>
+      <p>Built and maintained an audit dashboard tracking daily attendance behavior for 400+ remote employees across 10+ entities, producing weekly compliance reports for CEO review.</p>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-val">400+</div><div class="stat-lbl">employees</div></div>
+        <div class="stat"><div class="stat-val">10+</div><div class="stat-lbl">entities</div></div>
+        <div class="stat"><div class="stat-val">Weekly</div><div class="stat-lbl">reporting cadence</div></div>
+      </div>
+      <a class="card-action" href="#">View dashboard screenshot <span class="placeholder">add file</span></a>
+    </div>
+
+    <div class="card" data-cat="projects">
+      <div class="card-eyebrow">Market Expansion · The KPI Institute</div>
+      <h3>Saudi Arabia Vendor Registration Campaign</h3>
+      <p>Led end-to-end vendor registration for the company's expansion into the Saudi Arabia market — sourcing contacts, managing document compliance, coordinating across government procurement portals, and following up with procurement stakeholders via LinkedIn to secure supplier status with multiple enterprise targets.</p>
+      <a class="card-action" href="#">Read case study <span class="placeholder">add write-up</span></a>
+    </div>
+
+    <div class="card" data-cat="exec">
+      <div class="card-eyebrow">Recruitment · The KPI Institute</div>
+      <h3>Full-Cycle Recruitment Coordination</h3>
+      <p>Coordinated end-to-end recruitment for the OCEO FAES role — designed technical interview frameworks, conducted candidate evaluations, maintained detailed notes, and aligned final recommendations with the CEO and HR team.</p>
+      <a class="card-action" href="#">View interview template <span class="placeholder">add file</span></a>
+    </div>
+
+    <div class="card" data-cat="exec">
+      <div class="card-eyebrow">Executive Research · The KPI Institute</div>
+      <h3>International Travel Research & Briefing</h3>
+      <p>Compiled a structured research report comparing international travel packages, itineraries, and pricing for executive decision-making. Praised by the CEO for presentation quality, thoroughness, and ability to surface the best value options.</p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function showBranch(branch) {
+    document.getElementById('home-view').style.display = 'none';
+    document.getElementById('lang-view').classList.remove('visible');
+    document.getElementById('ops-view').classList.remove('visible');
+    document.getElementById(branch + '-view').classList.add('visible');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function goHome() {
+    document.getElementById('home-view').style.display = 'block';
+    document.getElementById('lang-view').classList.remove('visible');
+    document.getElementById('ops-view').classList.remove('visible');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function filterCards(containerId, cat, btn, parentId) {
+    document.querySelectorAll('#' + parentId + ' .subnav-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('#' + containerId + ' .card').forEach(c => {
+      c.style.display = (cat === 'all' || c.dataset.cat === cat) ? 'block' : 'none';
+    });
+  }
+</script>
+</body>
+</html>

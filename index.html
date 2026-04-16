@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nisrina Satyaningrum — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a1a;--muted:#6b6b6b;--faint:#f4f2ef;--border:#e2dfd9;--accent:#2d5a4e;--al:#e8f0ed;--white:#fff;--serif:'DM Serif Display',Georgia,serif;--sans:'DM Sans',system-ui,sans-serif;--amb-bg:#fef9e7;--amb-tx:#8b6914;--amb-bd:#f0d080}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);font-size:16px;line-height:1.7;color:var(--ink);background:var(--white)}
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-name{font-family:var(--serif);font-size:1.05rem;color:var(--ink);text-decoration:none}
+.nav-links{display:flex;gap:1.75rem;list-style:none}
+.nav-links a{font-size:.875rem;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+section{padding:5rem 2rem}
+.container{max-width:860px;margin:0 auto}
+.container-wide{max-width:1060px;margin:0 auto}
+#home{padding:7rem 2rem 5rem;background:var(--faint);border-bottom:1px solid var(--border)}
+.hero-tag{display:inline-block;font-size:.72rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--al);padding:.3rem .75rem;border-radius:2rem;margin-bottom:1.5rem}
+.hero-headline{font-family:var(--serif);font-size:clamp(2.2rem,5vw,3.4rem);line-height:1.2;letter-spacing:-.02em;margin-bottom:1.25rem;max-width:680px}
+.hero-sub{font-size:1rem;color:var(--muted);max-width:560px;margin-bottom:2.25rem;line-height:1.75}
+.hero-stats{display:flex;flex-wrap:wrap;gap:2rem;margin-bottom:2.5rem}
+.stat-num{display:block;font-family:var(--serif);font-size:1.8rem;color:var(--accent);line-height:1}
+.stat-label{font-size:.78rem;color:var(--muted);margin-top:.2rem}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:.75rem}
+.btn{display:inline-block;padding:.65rem 1.4rem;border-radius:.35rem;font-size:.875rem;font-weight:500;text-decoration:none;transition:all .2s;cursor:pointer;border:none}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:#214439}
+.btn-outline{background:transparent;color:var(--ink);border:1px solid var(--border)}
+.btn-outline:hover{background:var(--faint)}
+.section-label{font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.75rem}
+.section-heading{font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.2rem);line-height:1.25;letter-spacing:-.02em;margin-bottom:1.25rem}
+#about{background:var(--white)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.about-body p{color:var(--muted);margin-bottom:1rem;font-size:.95rem}
+.skills-group{margin-bottom:1.25rem}
+.skills-group-title{font-size:.75rem;font-weight:500;text-transform:uppercase;letter-spacing:.08em;color:var(--ink);margin-bottom:.5rem}
+.skill-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.skill-tag{font-size:.78rem;padding:.3rem .65rem;border-radius:2rem;background:var(--faint);color:var(--muted);border:1px solid var(--border)}
+#projects{background:var(--faint)}
+.filter-bar{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2.5rem}
+.filter-btn{font-size:.8rem;padding:.4rem 1rem;border-radius:2rem;border:1px solid var(--border);background:var(--white);color:var(--muted);cursor:pointer;transition:all .15s}
+.filter-btn.active,.filter-btn:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.25rem}
+.project-card{background:var(--white);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem;transition:box-shadow .2s;display:flex;flex-direction:column;gap:.85rem;cursor:pointer}
+.project-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.07)}
+.project-card.hidden{display:none}
+.card-category{font-size:.7rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.card-mock-badge{font-size:.7rem;font-weight:500;text-transform:uppercase;color:var(--amb-tx);background:var(--amb-bg);border:1px solid var(--amb-bd);padding:.15rem .5rem;border-radius:2rem;margin-left:.5rem}
+.card-title{font-family:var(--serif);font-size:1.15rem;line-height:1.3;letter-spacing:-.01em}
+.card-summary{font-size:.875rem;color:var(--muted);line-height:1.65}
+.card-deliverables{display:flex;flex-wrap:wrap;gap:.4rem}
+.del-tag{font-size:.73rem;padding:.22rem .55rem;border-radius:.25rem;background:#f0f7f4;color:var(--accent);border:1px solid #c8dfd8;font-weight:500}
+.card-metrics{display:flex;flex-wrap:wrap;gap:.4rem}
+.metric-pill{font-size:.75rem;font-weight:500;padding:.25rem .6rem;border-radius:2rem;background:var(--al);color:var(--accent)}
+.card-link{font-size:.82rem;font-weight:500;color:var(--accent);text-decoration:none;margin-top:auto}
+#proof{background:var(--white)}
+.proof-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.proof-card{border:1px solid var(--border);border-radius:.75rem;padding:1.5rem;display:flex;flex-direction:column;gap:.75rem}
+.proof-type{font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.proof-title{font-family:var(--serif);font-size:1.1rem;line-height:1.3}
+.proof-desc{font-size:.875rem;color:var(--muted);line-height:1.65}
+.proof-link{display:inline-flex;align-items:center;gap:.4rem;font-size:.85rem;font-weight:500;padding:.55rem 1.1rem;border-radius:.35rem;background:var(--accent);color:#fff;text-decoration:none;transition:background .2s;margin-top:.25rem;width:fit-content}
+.proof-link:hover{background:#214439}
+.proof-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+#certs{background:var(--faint)}
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.25rem;margin-top:1.5rem}
+.cert-card{background:var(--white);border:1px solid var(--border);border-radius:.75rem;padding:1.25rem;display:flex;flex-direction:column;gap:.5rem}
+.cert-name{font-weight:500;font-size:.95rem}
+.cert-issuer{font-size:.8rem;color:var(--muted)}
+.cert-detail{font-size:.82rem;color:var(--muted);line-height:1.6}
+.cert-applied{font-size:.78rem;color:var(--accent);background:var(--al);padding:.25rem .6rem;border-radius:.25rem;width:fit-content;margin-top:.25rem}
+#contact{background:var(--white)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start}
+.contact-links{margin-top:1.5rem;display:flex;flex-direction:column;gap:1rem}
+.contact-link-item{display:flex;align-items:center;gap:.75rem;font-size:.9rem;text-decoration:none;color:var(--ink)}
+.contact-link-item:hover{color:var(--accent)}
+.contact-link-icon{width:36px;height:36px;border-radius:.4rem;background:var(--faint);display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;border:1px solid var(--border)}
+.contact-availability{display:inline-flex;align-items:center;gap:.5rem;font-size:.82rem;color:var(--accent);background:var(--al);padding:.4rem .9rem;border-radius:2rem;margin-bottom:1.25rem}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.contact-note{font-size:.875rem;color:var(--muted);line-height:1.7}
+footer{padding:2rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+footer p{font-size:.8rem;color:var(--muted)}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:center;justify-content:center;padding:1rem}
+.modal-overlay.open{display:flex}
+.modal{background:var(--white);border-radius:1rem;max-width:720px;width:100%;max-height:90vh;overflow-y:auto;padding:2rem;position:relative}
+.modal-close{position:absolute;top:1rem;right:1rem;background:var(--faint);border:none;width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.modal-category{font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+.modal-title{font-family:var(--serif);font-size:1.5rem;line-height:1.25;margin-bottom:1.25rem}
+.mb{margin-bottom:1.5rem}
+.mb-title{font-size:.7rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);padding-bottom:.3rem;margin-bottom:.75rem}
+.mb p{font-size:.9rem;color:var(--muted);line-height:1.7;margin-bottom:.5rem}
+.mb ul{padding-left:1.1rem}
+.mb li{font-size:.9rem;color:var(--muted);margin-bottom:.35rem;line-height:1.6}
+.pw{border:1px solid var(--border);border-radius:.5rem;overflow:hidden;margin-top:.75rem}
+.pl{font-size:.7rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);background:var(--faint);padding:.5rem .75rem;border-bottom:1px solid var(--border)}
+.pt{width:100%;border-collapse:collapse;font-size:.78rem}
+.pt th{background:var(--faint);color:var(--ink);font-weight:500;padding:.45rem .65rem;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap}
+.pt td{padding:.4rem .65rem;border-bottom:1px solid var(--border);color:var(--muted);vertical-align:top}
+.pt tr:last-child td{border-bottom:none}
+.sg{color:#2d5a4e;background:#e8f0ed;padding:.1rem .4rem;border-radius:.25rem;font-size:.72rem;font-weight:500}
+.sa{color:var(--amb-tx);background:var(--amb-bg);padding:.1rem .4rem;border-radius:.25rem;font-size:.72rem;font-weight:500}
+.sr{color:#8b2020;background:#fdf0f0;padding:.1rem .4rem;border-radius:.25rem;font-size:.72rem;font-weight:500}
+.mm{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
+.mpl{display:inline-flex;align-items:center;gap:.4rem;font-size:.82rem;font-weight:500;padding:.45rem .9rem;border-radius:.3rem;background:var(--accent);color:#fff;text-decoration:none;margin-top:.5rem}
+.mpl:hover{background:#214439}
+@media(max-width:640px){
+  nav{padding:0 1rem}
+  .nav-links{gap:1rem}
+  .nav-links a{font-size:.8rem}
+  section{padding:3.5rem 1.25rem}
+  #home{padding:4.5rem 1.25rem 3.5rem}
+  .about-grid,.contact-grid,.proof-grid{grid-template-columns:1fr;gap:2.5rem}
+  .projects-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#home" class="nav-name">Nisrina Satyaningrum</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Work</a></li>
+    <li><a href="#proof">Proof</a></li>
+    <li><a href="#certs">Credentials</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="files/CV-Nisrina.pdf" target="_blank">CV ↗</a></li>
+  </ul>
+</nav>
+
+<section id="home">
+  <div class="container">
+    <span class="hero-tag">Open to opportunities · Remote &amp; Relocation</span>
+    <h1 class="hero-headline">I build systems, support executives, and make global teams run better.</h1>
+    <p class="hero-sub">Bilingual EN/ID operations professional. C-suite EA experience. Localization background. Based in Indonesia — working everywhere.</p>
+    <div class="hero-stats">
+      <div><span class="stat-num">400+</span><span class="stat-label">employees tracked</span></div>
+      <div><span class="stat-num">15</span><span class="stat-label">business entities</span></div>
+      <div><span class="stat-num">60%</span><span class="stat-label">faster turnaround</span></div>
+      <div><span class="stat-num">35k+</span><span class="stat-label">words translated</span></div>
+    </div>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn btn-primary">See my work</a>
+      <a href="#proof" class="btn btn-outline">View published work ↗</a>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-body">
+        <p class="section-label">About</p>
+        <h2 class="section-heading">Operations mind. Language background.</h2>
+        <p>I spent two years as Executive Assistant to the CEO at The KPI Institute — a global remote company with 15 business entities and 400+ employees across APAC and EMEA. I built the systems, ran the workflows, and kept the office moving.</p>
+        <p>Before that: translator, subtitler, localization coordinator. My language background means I communicate clearly, adapt to any audience, and nothing gets lost in translation — literally or otherwise.</p>
+        <p>Applied Linguistics degree, Universitas Diponegoro. IELTS 7.5. Published researcher. Active TED Translator volunteer. Looking for remote or international roles where I can keep building things that work.</p>
+      </div>
+      <div>
+        <div class="skills-group"><p class="skills-group-title">Executive &amp; Admin</p><div class="skill-tags"><span class="skill-tag">C-Suite Support</span><span class="skill-tag">Calendar Management</span><span class="skill-tag">Stakeholder Comms</span><span class="skill-tag">Compliance Tracking</span><span class="skill-tag">Recruitment Coordination</span></div></div>
+        <div class="skills-group"><p class="skills-group-title">Operations</p><div class="skill-tags"><span class="skill-tag">Process Design</span><span class="skill-tag">Vendor Management</span><span class="skill-tag">Workflow Systems</span><span class="skill-tag">KPI Reporting</span><span class="skill-tag">Market Expansion</span></div></div>
+        <div class="skills-group"><p class="skills-group-title">Language &amp; Localization</p><div class="skill-tags"><span class="skill-tag">EN › ID Translation</span><span class="skill-tag">Localization PM</span><span class="skill-tag">SDL Trados</span><span class="skill-tag">Subtitling</span><span class="skill-tag">Linguistic QA</span></div></div>
+        <div class="skills-group"><p class="skills-group-title">Tools</p><div class="skill-tags"><span class="skill-tag">Asana</span><span class="skill-tag">Microsoft 365</span><span class="skill-tag">Google Workspace</span><span class="skill-tag">Apollo</span><span class="skill-tag">LinkedIn Sales Nav</span><span class="skill-tag">CaptionHub</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container-wide">
+    <p class="section-label">Portfolio</p>
+    <h2 class="section-heading" style="margin-bottom:.5rem">Projects &amp; deliverables</h2>
+    <p style="color:var(--muted);font-size:.9rem;margin-bottom:2rem;max-width:520px">Every card shows what I actually built. Click to see the sample output — real structure, real data format.</p>
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="fp('all',this)">All</button>
+      <button class="filter-btn" onclick="fp('operations',this)">Operations &amp; EA</button>
+      <button class="filter-btn" onclick="fp('localization',this)">Language &amp; Localization</button>
+      <button class="filter-btn" onclick="fp('mock',this)">Simulated Projects</button>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card" data-category="operations" onclick="openModal('m-tracking')">
+        <div><span class="card-category">Operations &amp; EA</span></div>
+        <h3 class="card-title">CEO Request Tracking System</h3>
+        <p class="card-summary">Centralized intake system for all CEO requests — built from scratch, adopted org-wide as the standard process.</p>
+        <div class="card-deliverables"><span class="del-tag">Tracker (Excel)</span><span class="del-tag">Priority Matrix</span><span class="del-tag">SOP</span></div>
+        <div class="card-metrics"><span class="metric-pill">Org-wide adoption</span><span class="metric-pill">Zero dropped requests</span></div>
+        <span class="card-link">View output preview →</span>
+      </div>
+
+      <div class="project-card" data-category="operations" onclick="openModal('m-compliance')">
+        <div><span class="card-category">Operations &amp; EA</span></div>
+        <h3 class="card-title">Attendance Compliance Dashboard</h3>
+        <p class="card-summary">Weekly audit dashboard tracking daily attendance for 400+ remote employees across 10+ entities — used in CEO-level reviews.</p>
+        <div class="card-deliverables"><span class="del-tag">Dashboard (Excel)</span><span class="del-tag">Weekly Report</span></div>
+        <div class="card-metrics"><span class="metric-pill">400+ employees</span><span class="metric-pill">10+ entities</span><span class="metric-pill">Weekly cadence</span></div>
+        <span class="card-link">View output preview →</span>
+      </div>
+
+      <div class="project-card" data-category="operations" onclick="openModal('m-saudi')">
+        <div><span class="card-category">Operations &amp; EA</span></div>
+        <h3 class="card-title">Saudi Arabia Vendor Registration Campaign</h3>
+        <p class="card-summary">End-to-end vendor registration for market expansion — sourcing, document prep, portal registration, and LinkedIn outreach.</p>
+        <div class="card-deliverables"><span class="del-tag">Outreach Tracker</span><span class="del-tag">Document Log</span><span class="del-tag">Message Templates</span></div>
+        <div class="card-metrics"><span class="metric-pill">1,000+ prospects</span><span class="metric-pill">20+ vendors</span><span class="metric-pill">Market entry achieved</span></div>
+        <span class="card-link">View output preview →</span>
+      </div>
+
+      <div class="project-card" data-category="operations" onclick="openModal('m-recruit')">
+        <div><span class="card-category">Operations &amp; EA</span></div>
+        <h3 class="card-title">Full-Cycle Recruitment Coordination</h3>
+        <p class="card-summary">Interview framework design, candidate evaluation, and CEO-ready recommendation for an executive-level hire.</p>
+        <div class="card-deliverables"><span class="del-tag">Interview Template</span><span class="del-tag">Evaluation Rubric</span><span class="del-tag">Candidate Log</span></div>
+        <div class="card-metrics"><span class="metric-pill">Successful hire</span><span class="metric-pill">Reusable process</span></div>
+        <span class="card-link">View output preview →</span>
+      </div>
+
+      <div class="project-card" data-category="operations" onclick="openModal('m-ceo')">
+        <div><span class="card-category">Operations &amp; EA</span></div>
+        <h3 class="card-title">CEO &amp; COO Office Management</h3>
+        <p class="card-summary">Daily executive support across 15 entities and 400+ staff — calendars, stakeholder comms, briefing docs, cross-timezone coordination.</p>
+        <div class="card-deliverables"><span class="del-tag">Briefing Notes</span><span class="del-tag">Meeting Minutes</span><span class="del-tag">Stakeholder Log</span></div>
+        <div class="card-metrics"><span class="metric-pill">15 entities</span><span class="metric-pill">APAC &amp; EMEA</span></div>
+        <span class="card-link">View output preview →</span>
+      </div>
+
+      <div class="project-card" data-category="localization" onclick="openModal('m-lmsl')">
+        <div><span class="card-category">Language &amp; Localization</span></div>
+        <h3 class="card-title">Course &amp; Marketing Localization — LMSL</h3>
+        <p class="card-summary">Full localization lifecycle for 5+ course series (EN › ID) — translation, vendor management, QA, and delivery with measurable efficiency gains.</p>
+        <div class="card-deliverables"><span class="del-tag">Project Tracker</span><span class="del-tag">QA Checklist</span><span class="del-tag">Vendor Log</span></div>
+        <div class="card-metrics"><span class="metric-pill">60% faster</span><span class="metric-pill">30% cost reduction</span><span class="metric-pill">5+ series</span></div>
+        <span class="card-link">View output preview →</span>
+      </div>
+
+      <div class="project-card" data-category="localization" onclick="openModal('m-star')">
+        <div><span class="card-category">Language &amp; Localization</span></div>
+        <h3 class="card-title">Technical Documentation Translation — PT STAR</h3>
+        <p class="card-summary">35,000+ words of cloud computing user guides (EN › ID) over a two-year engagement using SDL Trados and Phrase.</p>
+        <div class="card-deliverables"><span class="del-tag">Translated Docs</span><span class="del-tag">Glossary</span><span class="del-tag">Style Guide Log</span></div>
+        <div class="card-metrics"><span class="metric-pill">35,000+ words</span><span class="metric-pill">2-year retention</span></div>
+        <span class="card-link">View output preview →</span>
+      </div>
+
+      <div class="project-card" data-category="localization" onclick="openModal('m-ted')">
+        <div><span class="card-category">Language &amp; Localization</span></div>
+        <h3 class="card-title">TED-Ed Indonesian Subtitles</h3>
+        <p class="card-summary">Volunteer subtitler since 2022. Work passes TED's peer review QA and is published live on TED.com.</p>
+        <div class="card-deliverables"><span class="del-tag">Published Subtitles</span><span class="del-tag">Live on TED.com</span></div>
+        <div class="card-metrics"><span class="metric-pill">Published on TED.com</span><span class="metric-pill">Since 2022</span></div>
+        <span class="card-link">View proof + profile →</span>
+      </div>
+
+      <div class="project-card" data-category="mock" onclick="openModal('m-mock-cs')">
+        <div><span class="card-category">Customer Success</span><span class="card-mock-badge">Simulated</span></div>
+        <h3 class="card-title">Advertiser Onboarding &amp; Account Health Tracker</h3>
+        <p class="card-summary">Full bilingual CS workflow — onboarding checklist, email templates, account health tracker, troubleshooting call transcript.</p>
+        <div class="card-deliverables"><span class="del-tag">Account Tracker (Sheets)</span><span class="del-tag">5 Email Templates</span><span class="del-tag">Onboarding Checklist</span></div>
+        <div class="card-metrics"><span class="metric-pill">EN/ID bilingual</span><span class="metric-pill">10 accounts</span></div>
+        <span class="card-link">View output preview →</span>
+      </div>
+
+      <div class="project-card" data-category="mock" onclick="openModal('m-mock-ea')">
+        <div><span class="card-category">Executive Assistant</span><span class="card-mock-badge">Simulated</span></div>
+        <h3 class="card-title">30-Day EA Operations Pack</h3>
+        <p class="card-summary">CEO calendar template, executive travel brief, stakeholder communication log, and board meeting prep checklist.</p>
+        <div class="card-deliverables"><span class="del-tag">Calendar Template</span><span class="del-tag">Travel Brief (PDF)</span><span class="del-tag">Stakeholder Log</span><span class="del-tag">Board Checklist</span></div>
+        <div class="card-metrics"><span class="metric-pill">4 deliverables</span><span class="metric-pill">C-suite ready</span></div>
+        <span class="card-link">View output preview →</span>
+      </div>
+
+      <div class="project-card" data-category="mock" onclick="openModal('m-mock-lpm')">
+        <div><span class="card-category">Localization PM</span><span class="card-mock-badge">Simulated</span></div>
+        <h3 class="card-title">End-to-End LPM Project Simulation</h3>
+        <p class="card-summary">Full localization PM cycle: project brief, Gantt timeline, vendor scorecard, QA checklist, and client status update email.</p>
+        <div class="card-deliverables"><span class="del-tag">Project Brief</span><span class="del-tag">Gantt (Sheets)</span><span class="del-tag">Vendor Scorecard</span><span class="del-tag">QA Checklist</span></div>
+        <div class="card-metrics"><span class="metric-pill">5 deliverables</span><span class="metric-pill">Full LPM cycle</span></div>
+        <span class="card-link">View output preview →</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="proof">
+  <div class="container">
+    <p class="section-label">External Proof</p>
+    <h2 class="section-heading" style="margin-bottom:.5rem">Verified &amp; published work</h2>
+    <p style="color:var(--muted);font-size:.9rem;margin-bottom:2rem">Real work you can click, verify, and read.</p>
+    <div class="proof-grid">
+      <div class="proof-card">
+        <p class="proof-type">Live Published Work · TED Translators</p>
+        <h3 class="proof-title">Indonesian Subtitles on TED.com</h3>
+        <p class="proof-desc">Active volunteer subtitler since September 2022. Work passes TED's peer reviewer QA and is published on the official platform — accessible to a global audience.</p>
+        <div class="proof-tags"><span class="skill-tag">Subtitling</span><span class="skill-tag">Linguistic QA</span><span class="skill-tag">EN/ID Bilingual</span><span class="skill-tag">Published output</span></div>
+        <a href="https://www.ted.com/profiles/33057121/translator" target="_blank" class="proof-link">View my TED Translator profile ↗</a>
+      </div>
+      <div class="proof-card">
+        <p class="proof-type">Peer-Reviewed Publication · Jurnal Komunikasi · Oct 2024</p>
+        <h3 class="proof-title">Localization of the Spotify Website from English to Indonesian</h3>
+        <p class="proof-desc">Research analyzing Spotify's EN › ID localization strategies — terminology adaptation, cultural equivalence, and UI string localization. Demonstrates deep understanding of localization theory and practice.</p>
+        <div class="proof-tags"><span class="skill-tag">Localization Analysis</span><span class="skill-tag">EN/ID</span><span class="skill-tag">Research</span><span class="skill-tag">Published</span></div>
+        <a href="https://journal.uii.ac.id/jurnal-komunikasi/article/view/30637" target="_blank" class="proof-link">Read the publication ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="container">
+    <p class="section-label">Credentials</p>
+    <h2 class="section-heading" style="margin-bottom:.25rem">Certifications &amp; qualifications</h2>
+    <p style="color:var(--muted);font-size:.9rem;margin-bottom:.5rem">What each one proves — and how I use it.</p>
+    <div class="certs-grid">
+      <div class="cert-card">
+        <p class="cert-name">IELTS Academic — Band 7.5</p>
+        <p class="cert-issuer">British Council</p>
+        <p class="cert-detail">C1 level across reading, writing, listening, and speaking. Internationally recognised proof of professional English proficiency.</p>
+        <span class="cert-applied">Used in: all client-facing and executive communication roles</span>
+      </div>
+      <div class="cert-card">
+        <p class="cert-name">UKBI — 687/800 (Sangat Unggul)</p>
+        <p class="cert-issuer">Badan Bahasa, Indonesia</p>
+        <p class="cert-detail">Top-tier score in Indonesia's national language proficiency test — formal proof of native-level Indonesian writing and comprehension.</p>
+        <span class="cert-applied">Used in: all EN › ID localization and communication work</span>
+      </div>
+      <div class="cert-card">
+        <p class="cert-name">SDL Trados 2022 — Translation &amp; Localization</p>
+        <p class="cert-issuer">Udemy</p>
+        <p class="cert-detail">Practical training in CAT tool workflows: translation memories, termbase management, file preparation, and QA review.</p>
+        <span class="cert-applied">Used in: LMSL localization projects, PT STAR translation</span>
+      </div>
+      <div class="cert-card">
+        <p class="cert-name">Localization Basics</p>
+        <p class="cert-issuer">Lokalise</p>
+        <p class="cert-detail">Covers localization workflow design, file formats, TMS, and the LPM role in global product teams.</p>
+        <span class="cert-applied">Used in: LPM simulation, LMSL vendor coordination workflow</span>
+      </div>
+      <div class="cert-card">
+        <p class="cert-name">ISO 17100 — Translation Services Standard</p>
+        <p class="cert-issuer">Udemy</p>
+        <p class="cert-detail">International standard for translation service quality — process requirements, competence levels, and QA frameworks.</p>
+        <span class="cert-applied">Used in: QA checklist design, vendor evaluation criteria</span>
+      </div>
+      <div class="cert-card">
+        <p class="cert-name">Bridging Course — Master's Study Abroad Scholarship</p>
+        <p class="cert-issuer">LPDP / Ministry of Education</p>
+        <p class="cert-detail">Competitive scholarship programme for Indonesian postgraduate candidates pursuing international study.</p>
+        <span class="cert-applied">Credential: academic &amp; professional recognition</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <p class="section-label">Contact</p>
+        <h2 class="section-heading">Let's connect.</h2>
+        <div class="contact-availability"><span class="dot"></span>Available for new opportunities</div>
+        <p class="contact-note">Looking for roles in executive/virtual assistance, customer success, project coordination, or localization. Remote or relocation welcome.</p>
+      </div>
+      <div>
+        <div class="contact-links">
+          <a href="mailto:nisrinasatya16@gmail.com" class="contact-link-item"><span class="contact-link-icon">✉</span>nisrinasatya16@gmail.com</a>
+          <a href="https://linkedin.com/in/nisrinasatya" target="_blank" class="contact-link-item"><span class="contact-link-icon">in</span>linkedin.com/in/nisrinasatya</a>
+          <a href="https://wa.me/6287720151076" target="_blank" class="contact-link-item"><span class="contact-link-icon">W</span>WhatsApp · +62 877 2015 1076</a>
+          <a href="files/CV-Nisrina.pdf" target="_blank" class="contact-link-item"><span class="contact-link-icon">↓</span>Download CV (PDF)</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Nisrina Satyaningrum · Semarang, Indonesia</p>
+  <p style="font-size:.75rem">IELTS 7.5 · EN/ID Bilingual · GitHub Pages</p>
+</footer>
+
+<!-- ═══ MODALS ═══ -->
+
+<div class="modal-overlay" id="m-tracking" onclick="cmo(event,'m-tracking')">
+<div class="modal"><button class="modal-close" onclick="closeModal('m-tracking')">✕</button>
+<p class="modal-category">Operations &amp; EA · The KPI Institute</p>
+<h2 class="modal-title">CEO Request Tracking System</h2>
+<div class="mb"><p class="mb-title">What I built</p>
+<p>Centralized intake tracker (Excel + Teams) logging every incoming CEO request with priority, owner, deadline, and status. Adopted as the org-wide standard for routing work to the executive office.</p></div>
+<div class="mb"><p class="mb-title">Sample output — CEO Request Tracker</p>
+<div class="pw"><div class="pl">Sheet: CEO Requests · Live tracker</div>
+<table class="pt"><tr><th>#</th><th>Date</th><th>Request</th><th>From</th><th>Priority</th><th>Owner</th><th>Due</th><th>Status</th></tr>
+<tr><td>001</td><td>02 Mar</td><td>Prepare Q1 board summary deck</td><td>CEO</td><td>High</td><td>Nisrina</td><td>05 Mar</td><td><span class="sg">Done</span></td></tr>
+<tr><td>002</td><td>03 Mar</td><td>Follow up Saudi procurement portal</td><td>CEO</td><td>High</td><td>Nisrina</td><td>07 Mar</td><td><span class="sg">Done</span></td></tr>
+<tr><td>003</td><td>04 Mar</td><td>Source 3 hotel options — Singapore trip</td><td>CEO</td><td>Med</td><td>Nisrina</td><td>10 Mar</td><td><span class="sg">Done</span></td></tr>
+<tr><td>004</td><td>05 Mar</td><td>Schedule COO alignment call (APAC)</td><td>COO</td><td>Med</td><td>Nisrina</td><td>08 Mar</td><td><span class="sa">In Progress</span></td></tr>
+<tr><td>005</td><td>06 Mar</td><td>Draft onboarding SOP for new entity</td><td>CEO</td><td>Low</td><td>Nisrina</td><td>15 Mar</td><td><span class="sa">In Progress</span></td></tr>
+</table></div></div>
+<div class="mb"><p class="mb-title">Impact</p><div class="mm"><span class="metric-pill">Zero dropped requests</span><span class="metric-pill">Org-wide adoption</span><span class="metric-pill">Standard process established</span></div></div>
+</div></div>
+
+<div class="modal-overlay" id="m-compliance" onclick="cmo(event,'m-compliance')">
+<div class="modal"><button class="modal-close" onclick="closeModal('m-compliance')">✕</button>
+<p class="modal-category">Operations &amp; EA · The KPI Institute</p>
+<h2 class="modal-title">Attendance Compliance Dashboard</h2>
+<div class="mb"><p class="mb-title">What I built</p>
+<p>Weekly Excel audit dashboard aggregating daily attendance for 400+ remote employees across 10+ entities — flagged non-compliance, escalated patterns, delivered weekly CEO report.</p></div>
+<div class="mb"><p class="mb-title">Sample output — Weekly Compliance Summary</p>
+<div class="pw"><div class="pl">Sheet: Compliance Summary · Week of 10 Mar 2025</div>
+<table class="pt"><tr><th>Entity</th><th>Total Staff</th><th>Compliant</th><th>Non-Compliant</th><th>Rate</th><th>Flag</th></tr>
+<tr><td>KPI Institute AU</td><td>48</td><td>46</td><td>2</td><td>96%</td><td><span class="sg">OK</span></td></tr>
+<tr><td>LMSL</td><td>62</td><td>58</td><td>4</td><td>94%</td><td><span class="sg">OK</span></td></tr>
+<tr><td>KPI ME</td><td>31</td><td>24</td><td>7</td><td>77%</td><td><span class="sr">Escalate</span></td></tr>
+<tr><td>KPI SEA</td><td>40</td><td>38</td><td>2</td><td>95%</td><td><span class="sg">OK</span></td></tr>
+<tr><td>KPI Africa</td><td>27</td><td>22</td><td>5</td><td>81%</td><td><span class="sa">Monitor</span></td></tr>
+</table></div></div>
+<div class="mb"><p class="mb-title">Impact</p><div class="mm"><span class="metric-pill">400+ employees tracked</span><span class="metric-pill">10+ entities</span><span class="metric-pill">CEO-reviewed weekly</span></div></div>
+</div></div>
+
+<div class="modal-overlay" id="m-saudi" onclick="cmo(event,'m-saudi')">
+<div class="modal"><button class="modal-close" onclick="closeModal('m-saudi')">✕</button>
+<p class="modal-category">Operations &amp; EA · The KPI Institute</p>
+<h2 class="modal-title">Saudi Arabia Vendor Registration Campaign</h2>
+<div class="mb"><p class="mb-title">What I built</p>
+<p>End-to-end outreach and registration system for Saudi Arabia market expansion — contact tracker, document compliance log, message templates, portal registration workflow. No playbook existed; I created one.</p></div>
+<div class="mb"><p class="mb-title">Sample output — Outreach &amp; Registration Tracker</p>
+<div class="pw"><div class="pl">Sheet: SA Vendor Outreach · Apollo + LinkedIn</div>
+<table class="pt"><tr><th>Company</th><th>Contact</th><th>Platform</th><th>Date</th><th>Docs</th><th>Portal</th><th>Status</th></tr>
+<tr><td>Aramco Procurement</td><td>Ahmed Al-R.</td><td>LinkedIn</td><td>12 Jan</td><td>Yes</td><td>Etimad</td><td><span class="sg">Registered</span></td></tr>
+<tr><td>NEOM Partners</td><td>Fatimah H.</td><td>Apollo</td><td>14 Jan</td><td>Yes</td><td>Monafasat</td><td><span class="sa">Pending</span></td></tr>
+<tr><td>Saudi Vision Co.</td><td>Khalid M.</td><td>LinkedIn</td><td>15 Jan</td><td>No</td><td>–</td><td><span class="sa">Follow-up</span></td></tr>
+<tr><td>Riyadh Tech Hub</td><td>Sara Al-O.</td><td>Apollo</td><td>17 Jan</td><td>Yes</td><td>Etimad</td><td><span class="sg">Registered</span></td></tr>
+<tr><td>SABIC Suppliers</td><td>Omar B.N.</td><td>LinkedIn</td><td>18 Jan</td><td>In progress</td><td>–</td><td><span class="sa">In Progress</span></td></tr>
+</table></div></div>
+<div class="mb"><p class="mb-title">Impact</p><div class="mm"><span class="metric-pill">Multiple enterprise registrations</span><span class="metric-pill">1,000+ prospects reached</span><span class="metric-pill">Reusable process documented</span></div></div>
+</div></div>
+
+<div class="modal-overlay" id="m-recruit" onclick="cmo(event,'m-recruit')">
+<div class="modal"><button class="modal-close" onclick="closeModal('m-recruit')">✕</button>
+<p class="modal-category">Operations &amp; EA · The KPI Institute</p>
+<h2 class="modal-title">Full-Cycle Recruitment Coordination</h2>
+<div class="mb"><p class="mb-title">What I built</p>
+<p>Structured recruitment workflow: interview framework, evaluation rubric with scoring, candidate tracking log, and CEO-ready recommendation summary. Process is fully reusable for future hires.</p></div>
+<div class="mb"><p class="mb-title">Sample output — Candidate Evaluation Log</p>
+<div class="pw"><div class="pl">Sheet: Candidate Tracker · OCEO FAES Hiring</div>
+<table class="pt"><tr><th>Candidate</th><th>Stage</th><th>Tech /10</th><th>Comms /10</th><th>Culture /10</th><th>Total</th><th>Decision</th></tr>
+<tr><td>Candidate A</td><td>Final</td><td>8</td><td>9</td><td>8</td><td>25</td><td><span class="sg">Recommend</span></td></tr>
+<tr><td>Candidate B</td><td>Final</td><td>7</td><td>7</td><td>9</td><td>23</td><td><span class="sa">Reserve</span></td></tr>
+<tr><td>Candidate C</td><td>Interview 1</td><td>6</td><td>6</td><td>7</td><td>19</td><td><span class="sr">Not Proceed</span></td></tr>
+<tr><td>Candidate D</td><td>Screening</td><td>5</td><td>8</td><td>6</td><td>19</td><td><span class="sr">Not Proceed</span></td></tr>
+</table></div></div>
+<div class="mb"><p class="mb-title">Impact</p><div class="mm"><span class="metric-pill">Successful hire delivered</span><span class="metric-pill">CEO-aligned decision</span><span class="metric-pill">Reusable templates</span></div></div>
+</div></div>
+
+<div class="modal-overlay" id="m-ceo" onclick="cmo(event,'m-ceo')">
+<div class="modal"><button class="modal-close" onclick="closeModal('m-ceo')">✕</button>
+<p class="modal-category">Operations &amp; EA · The KPI Institute</p>
+<h2 class="modal-title">CEO &amp; COO Office Management</h2>
+<div class="mb"><p class="mb-title">What I delivered</p>
+<ul>
+<li>Daily calendar management and email triage across APAC and EMEA time zones</li>
+<li>Briefing notes prepared before every major meeting — executive arrived informed, not catching up</li>
+<li>Stakeholder communications drafted on behalf of CEO (correct tone, right context)</li>
+<li>Weekly action item logs from senior leadership meetings, circulated to departments</li>
+<li>International travel logistics and personal scheduling for senior leadership</li>
+</ul></div>
+<div class="mb"><p class="mb-title">Sample output — Weekly Stakeholder Log</p>
+<div class="pw"><div class="pl">Sheet: Stakeholder Log · Week of 17 Mar 2025</div>
+<table class="pt"><tr><th>Stakeholder</th><th>Role</th><th>Last Contact</th><th>Topic</th><th>Next Action</th></tr>
+<tr><td>David L.</td><td>COO, APAC</td><td>15 Mar</td><td>Q1 resource allocation</td><td>Send revised headcount table</td></tr>
+<tr><td>Rania M.</td><td>Head of HR</td><td>16 Mar</td><td>Compliance report follow-up</td><td>Escalate 3 flagged entities</td></tr>
+<tr><td>Tom B.</td><td>COO, EMEA</td><td>14 Mar</td><td>Board deck review</td><td>Confirm slide format by 18 Mar</td></tr>
+</table></div></div>
+<div class="mb"><p class="mb-title">Impact</p><div class="mm"><span class="metric-pill">15 entities supported</span><span class="metric-pill">400+ employees</span><span class="metric-pill">APAC &amp; EMEA</span></div></div>
+</div></div>
+
+<div class="modal-overlay" id="m-lmsl" onclick="cmo(event,'m-lmsl')">
+<div class="modal"><button class="modal-close" onclick="closeModal('m-lmsl')">✕</button>
+<p class="modal-category">Language &amp; Localization · Life Management Science Labs</p>
+<h2 class="modal-title">Course &amp; Marketing Localization</h2>
+<div class="mb"><p class="mb-title">What I built</p>
+<p>Full localization workflow: project tracker for concurrent series, vendor coordination log, QA checklist, and SDL Trados TM management. Introduced process improvements that cut turnaround 60% and costs 30%.</p></div>
+<div class="mb"><p class="mb-title">Sample output — Localization Project Tracker</p>
+<div class="pw"><div class="pl">Sheet: Project Tracker · LMSL Course Localization</div>
+<table class="pt"><tr><th>Project</th><th>Words</th><th>Vendor</th><th>Deadline</th><th>Translation</th><th>QA</th><th>Delivery</th></tr>
+<tr><td>Leadership Course 1</td><td>8,400</td><td>Vendor A</td><td>10 Feb</td><td><span class="sg">Done</span></td><td><span class="sg">Done</span></td><td><span class="sg">Delivered</span></td></tr>
+<tr><td>HR Module Series</td><td>12,200</td><td>Vendor B</td><td>18 Feb</td><td><span class="sg">Done</span></td><td><span class="sa">In Review</span></td><td><span class="sa">Pending</span></td></tr>
+<tr><td>Marketing Assets Q1</td><td>3,100</td><td>In-house</td><td>22 Feb</td><td><span class="sa">In Progress</span></td><td>–</td><td>–</td></tr>
+<tr><td>Sales Training</td><td>5,600</td><td>Vendor A</td><td>28 Feb</td><td><span class="sa">In Progress</span></td><td>–</td><td>–</td></tr>
+</table></div></div>
+<div class="mb"><p class="mb-title">Impact</p><div class="mm"><span class="metric-pill">60% faster turnaround</span><span class="metric-pill">30% cost reduction</span><span class="metric-pill">5+ series delivered</span></div></div>
+</div></div>
+
+<div class="modal-overlay" id="m-star" onclick="cmo(event,'m-star')">
+<div class="modal"><button class="modal-close" onclick="closeModal('m-star')">✕</button>
+<p class="modal-category">Language &amp; Localization · PT STAR Software Indonesia</p>
+<h2 class="modal-title">Technical Documentation Translation</h2>
+<div class="mb"><p class="mb-title">What I delivered</p>
+<p>35,000+ words of cloud computing user guides (EN › ID) over two years using SDL Trados and Phrase. Maintained a personal project glossary for consistency across all documents; flagged source ambiguities to improve client's original docs.</p></div>
+<div class="mb"><p class="mb-title">Sample output — Project Glossary (extract)</p>
+<div class="pw"><div class="pl">Glossary: Cloud Computing EN › ID · PT STAR</div>
+<table class="pt"><tr><th>English Term</th><th>Indonesian (Approved)</th><th>Notes</th></tr>
+<tr><td>Cloud storage</td><td>Penyimpanan awan</td><td>Standard; avoid "storage cloud"</td></tr>
+<tr><td>Dashboard</td><td>Dasbor</td><td>Absorbed loanword; use consistently</td></tr>
+<tr><td>User interface</td><td>Antarmuka pengguna</td><td>Client-approved; not "UI"</td></tr>
+<tr><td>Bandwidth</td><td>Bandwidth</td><td>Retain EN; no Indonesian equivalent</td></tr>
+<tr><td>Firewall</td><td>Firewall</td><td>Retain EN per client style guide</td></tr>
+</table></div></div>
+<div class="mb"><p class="mb-title">Impact</p><div class="mm"><span class="metric-pill">35,000+ words</span><span class="metric-pill">2-year client retention</span><span class="metric-pill">Zero quality escalations</span></div></div>
+</div></div>
+
+<div class="modal-overlay" id="m-ted" onclick="cmo(event,'m-ted')">
+<div class="modal"><button class="modal-close" onclick="closeModal('m-ted')">✕</button>
+<p class="modal-category">Language &amp; Localization · TED Translators · Volunteer</p>
+<h2 class="modal-title">TED-Ed Indonesian Subtitles</h2>
+<div class="mb"><p class="mb-title">What this proves</p>
+<ul>
+<li>Published output — verifiable on TED.com right now</li>
+<li>Passes TED's independent peer reviewer QA process — not self-assessed</li>
+<li>Consistent contributor since September 2022</li>
+<li>CaptionHub proficiency, subtitle timing, and compression</li>
+</ul></div>
+<div class="mb"><p class="mb-title">Verify the work</p>
+<a href="https://www.ted.com/profiles/33057121/translator" target="_blank" class="mpl">View my TED Translator profile ↗</a></div>
+</div></div>
+
+<div class="modal-overlay" id="m-mock-cs" onclick="cmo(event,'m-mock-cs')">
+<div class="modal"><button class="modal-close" onclick="closeModal('m-mock-cs')">✕</button>
+<p class="modal-category">Customer Success · <span style="color:var(--amb-tx);background:var(--amb-bg);padding:.1rem .45rem;border-radius:2rem;font-size:.7rem;border:1px solid var(--amb-bd)">Simulated</span></p>
+<h2 class="modal-title">Advertiser Onboarding &amp; Account Health Tracker</h2>
+<div class="mb"><p class="mb-title">Scenario</p>
+<p>Fictional company: AdReach Asia — digital advertising platform. I simulated 30 days as a bilingual Customer Success Specialist supporting 10 Indonesian-speaking advertiser accounts.</p></div>
+<div class="mb"><p class="mb-title">What I built</p>
+<ul>
+<li>Bilingual (EN/ID) client onboarding checklist</li>
+<li>5 email templates: welcome, campaign setup, performance review, issue escalation, renewal</li>
+<li>Account health tracker (see below)</li>
+<li>Bilingual troubleshooting call transcript for underperforming campaign</li>
+</ul></div>
+<div class="mb"><p class="mb-title">Sample output — Account Health Tracker</p>
+<div class="pw"><div class="pl">Sheet: Account Health · AdReach Asia · March 2025</div>
+<table class="pt"><tr><th>Account</th><th>Onboarding</th><th>Tickets</th><th>Last Contact</th><th>Health /5</th><th>Renewal Risk</th></tr>
+<tr><td>Tokopedia Ads</td><td><span class="sg">Complete</span></td><td>1</td><td>12 Mar</td><td>5</td><td><span class="sg">Low</span></td></tr>
+<tr><td>Shopee ID</td><td><span class="sg">Complete</span></td><td>3</td><td>10 Mar</td><td>4</td><td><span class="sg">Low</span></td></tr>
+<tr><td>Bukalapak</td><td><span class="sa">In Progress</span></td><td>5</td><td>8 Mar</td><td>3</td><td><span class="sa">Medium</span></td></tr>
+<tr><td>Gojek Merchant</td><td><span class="sg">Complete</span></td><td>7</td><td>6 Mar</td><td>2</td><td><span class="sr">High</span></td></tr>
+<tr><td>Grab Ads ID</td><td><span class="sa">In Progress</span></td><td>4</td><td>11 Mar</td><td>3</td><td><span class="sa">Medium</span></td></tr>
+</table></div></div>
+</div></div>
+
+<div class="modal-overlay" id="m-mock-ea" onclick="cmo(event,'m-mock-ea')">
+<div class="modal"><button class="modal-close" onclick="closeModal('m-mock-ea')">✕</button>
+<p class="modal-category">Executive Assistant · <span style="color:var(--amb-tx);background:var(--amb-bg);padding:.1rem .45rem;border-radius:2rem;font-size:.7rem;border:1px solid var(--amb-bd)">Simulated</span></p>
+<h2 class="modal-title">30-Day EA Operations Pack</h2>
+<div class="mb"><p class="mb-title">Scenario</p>
+<p>Fictional company: NovaBridge Consulting — Series B startup. CEO needs EA support during international expansion preparation month.</p></div>
+<div class="mb"><p class="mb-title">What I built</p>
+<ul>
+<li>Weekly CEO calendar template with time-blocking: deep work / external meetings / admin / buffer</li>
+<li>2-page Singapore business trip brief: flights, hotel comparison, meeting schedule, local notes</li>
+<li>Stakeholder log: 8 contacts, relationship status, last touchpoint, next action</li>
+<li>Board meeting prep checklist: documents, logistics, pre-reads, follow-up actions</li>
+</ul></div>
+<div class="mb"><p class="mb-title">Sample output — Executive Travel Brief (extract)</p>
+<div class="pw"><div class="pl">Document: Singapore Trip Brief · 22–25 Apr 2025</div>
+<table class="pt"><tr><th>Item</th><th>Option A</th><th>Option B</th><th>Recommended</th></tr>
+<tr><td>Flight (CGK→SIN)</td><td>Garuda 07:00 · $320</td><td>SQ 09:15 · $410</td><td><span class="sg">Option A</span></td></tr>
+<tr><td>Hotel</td><td>Marriott MBS · $280/n</td><td>Andaz Orchard · $240/n</td><td><span class="sg">Option B</span></td></tr>
+<tr><td>Day 1 meeting</td><td colspan="2">Partner meeting · 14:00 · WeWork Tanjong Pagar</td><td><span class="sg">Confirmed</span></td></tr>
+<tr><td>Day 2 meeting</td><td colspan="2">Investor lunch · 12:30 · Capella Singapore</td><td><span class="sg">Confirmed</span></td></tr>
+</table></div></div>
+</div></div>
+
+<div class="modal-overlay" id="m-mock-lpm" onclick="cmo(event,'m-mock-lpm')">
+<div class="modal"><button class="modal-close" onclick="closeModal('m-mock-lpm')">✕</button>
+<p class="modal-category">Localization PM · <span style="color:var(--amb-tx);background:var(--amb-bg);padding:.1rem .45rem;border-radius:2rem;font-size:.7rem;border:1px solid var(--amb-bd)">Simulated</span></p>
+<h2 class="modal-title">End-to-End LPM Project Simulation</h2>
+<div class="mb"><p class="mb-title">Scenario</p>
+<p>Fictional company: LearnPath Global — e-learning platform. 3-module onboarding course needs Indonesian localization. I ran the full LPM cycle.</p></div>
+<div class="mb"><p class="mb-title">What I built</p>
+<ul>
+<li>Project brief template (scope, word count, tone, glossary, file format)</li>
+<li>Gantt-style timeline: translation → review → QA → delivery</li>
+<li>Vendor evaluation scorecard (5 criteria)</li>
+<li>QA checklist: terminology, style guide, formatting, cultural fit</li>
+<li>Client midpoint status update email</li>
+</ul></div>
+<div class="mb"><p class="mb-title">Sample output — Vendor Scorecard</p>
+<div class="pw"><div class="pl">Sheet: Vendor Evaluation · LearnPath ID Localization</div>
+<table class="pt"><tr><th>Vendor</th><th>Quality</th><th>CAT</th><th>Domain</th><th>Response</th><th>Price</th><th>Total /100</th><th>Decision</th></tr>
+<tr><td>Vendor A</td><td>18</td><td>17</td><td>16</td><td>19</td><td>15</td><td>85</td><td><span class="sg">Select</span></td></tr>
+<tr><td>Vendor B</td><td>15</td><td>14</td><td>18</td><td>14</td><td>18</td><td>79</td><td><span class="sa">Reserve</span></td></tr>
+<tr><td>Vendor C</td><td>12</td><td>11</td><td>13</td><td>13</td><td>19</td><td>68</td><td><span class="sr">Decline</span></td></tr>
+</table></div></div>
+</div></div>
+
+<script>
+function fp(cat,btn){document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.project-card').forEach(card=>{(cat==='all'||card.dataset.category===cat)?card.classList.remove('hidden'):card.classList.add('hidden')})}
+function openModal(id){document.getElementById(id).classList.add('open');document.body.style.overflow='hidden'}
+function closeModal(id){document.getElementById(id).classList.remove('open');document.body.style.overflow=''}
+function cmo(e,id){if(e.target===document.getElementById(id))closeModal(id)}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal-overlay.open').forEach(m=>{m.classList.remove('open');document.body.style.overflow=''})})
+</script>
+</body>
+</html>
